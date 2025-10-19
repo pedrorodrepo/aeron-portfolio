@@ -1,0 +1,54 @@
+<div class="management-container">
+  <div class="header">
+    <h1>Manage Artwork</h1>
+    <button class="btn-upload" (click)="navigateToUpload()">+ Upload New</button>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="images-list" *ngIf="!loading" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div 
+      class="image-item" 
+      *ngFor="let image of images"
+      cdkDrag
+      [class.hidden]="!image.isVisible"
+    >
+      <div class="drag-handle" cdkDragHandle>☰</div>
+      <img [src]="image.s3Url" [alt]="image.title || image.filename" />
+      <div class="image-info">
+        <h3>{{ image.title || image.filename }}</h3>
+        <p>{{ image.description }}</p>
+        <small>Uploaded: {{ image.uploadDate | date }}</small>
+      </div>
+      <div class="actions">
+        <button 
+          class="btn-toggle" 
+          (click)="toggleVisibility(image.id)"
+          [title]="image.isVisible ? 'Hide' : 'Show'"
+        >
+          {{ image.isVisible ? '👁️' : '🚫' }}
+        </button>
+        <button 
+          class="btn-delete" 
+          (click)="confirmDelete(image.id)"
+          title="Delete"
+        >
+          🗑️
+        </button>
+      </div>
+
+      <div class="delete-confirm" *ngIf="deleteConfirm === image.id">
+        <p>Delete this image?</p>
+        <button class="btn-yes" (click)="deleteImage(image.id)">Yes</button>
+        <button class="btn-no" (click)="cancelDelete()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && images.length === 0">
+    <p>No images yet. Upload your first artwork!</p>
+    <button class="btn-upload" (click)="navigateToUpload()">Upload Now</button>
+  </div>
+</div>

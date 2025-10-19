@@ -1,0 +1,33 @@
+<div class="home-container">
+  <header class="hero">
+    <h1>Aeron Portfolio</h1>
+    <p>Explore my creative journey</p>
+  </header>
+
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="gallery" *ngIf="!loading">
+    <div class="gallery-item" *ngFor="let image of images" (click)="openImage(image)">
+      <img [src]="image.s3Url" [alt]="image.title || image.filename" />
+      <div class="image-info">
+        <h3>{{ image.title }}</h3>
+        <p class="description" *ngIf="image.description">{{ image.description }}</p>
+        <p class="date">{{ image.uploadDate | date:'MM/dd/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="selectedImage" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+      <img [src]="selectedImage.s3Url" [alt]="selectedImage.title || selectedImage.filename" />
+      <div class="modal-info">
+        <h2>{{ selectedImage.title }}</h2>
+        <p class="description" *ngIf="selectedImage.description">{{ selectedImage.description }}</p>
+        <p class="date">{{ selectedImage.uploadDate | date:'MM/dd/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

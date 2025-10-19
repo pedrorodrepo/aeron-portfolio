@@ -1,0 +1,21 @@
+<header class="header">
+  <div class="container">
+    <a routerLink="/" class="logo">Aeron</a>
+    
+    <button class="menu-toggle" (click)="toggleMenu()">
+      ☰
+    </button>
+
+    <nav [class.open]="menuOpen">
+      <a routerLink="/" (click)="menuOpen = false">Gallery</a>
+      
+      <ng-container *ngIf="isAuthenticated">
+        <a routerLink="/admin/management" (click)="menuOpen = false">Manage</a>
+        <a routerLink="/admin/upload" (click)="menuOpen = false">Upload</a>
+        <button class="btn-logout" (click)="logout()">Logout</button>
+      </ng-container>
+      
+      <a *ngIf="!isAuthenticated" routerLink="/admin/login" (click)="menuOpen = false">Admin</a>
+    </nav>
+  </div>
+</header>
