@@ -7,7 +7,7 @@
     </button>
 
     <nav [class.open]="menuOpen">
-      <a routerLink="/" (click)="menuOpen = false">Gallery</a>
+      <a routerLink="/" (click)="menuOpen = false">Prints</a>
       
       <ng-container *ngIf="isAuthenticated">
         <a routerLink="/admin/management" (click)="menuOpen = false">Manage</a>

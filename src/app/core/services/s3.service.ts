@@ -10,42 +10,68 @@ export class S3Service {
   private mockImages: ArtworkImage[] = [
     {
       id: '1',
-      filename: 'artwork1.jpg',
-      s3Key: 'artworks/artwork1.jpg',
-      s3Url: 'https://via.placeholder.com/800x600/FF6B6B/FFFFFF?text=Artwork+1',
       title: 'Abstract Composition',
       description: 'A beautiful abstract piece',
       order: 1,
       isVisible: true,
       uploadDate: new Date('2024-01-15'),
-      fileSize: 2048000,
-      dimensions: { width: 800, height: 600 }
+      images: [
+        {
+          filename: 'artwork1.jpg',
+          s3Key: 'artworks/artwork1.jpg',
+          s3Url: 'https://via.placeholder.com/800x600/FF6B6B/FFFFFF?text=Artwork+1',
+          fileSize: 2048000,
+          dimensions: { width: 800, height: 600 }
+        }
+      ]
     },
     {
       id: '2',
-      filename: 'artwork2.jpg',
-      s3Key: 'artworks/artwork2.jpg',
-      s3Url: 'https://via.placeholder.com/800x600/4ECDC4/FFFFFF?text=Artwork+2',
       title: 'Landscape Dreams',
       description: 'Inspired by nature',
       order: 2,
       isVisible: true,
       uploadDate: new Date('2024-02-20'),
-      fileSize: 1856000,
-      dimensions: { width: 800, height: 600 }
+      images: [
+        {
+          filename: 'artwork2.jpg',
+          s3Key: 'artworks/artwork2.jpg',
+          s3Url: 'https://via.placeholder.com/800x600/4ECDC4/FFFFFF?text=Artwork+2',
+          fileSize: 1856000,
+          dimensions: { width: 800, height: 600 }
+        }
+      ]
     },
     {
       id: '3',
-      filename: 'artwork3.jpg',
-      s3Key: 'artworks/artwork3.jpg',
-      s3Url: 'https://via.placeholder.com/800x600/95E1D3/FFFFFF?text=Artwork+3',
       title: 'Urban Reflections',
-      description: 'City life captured',
+      description: 'City life captured - Multiple images',
       order: 3,
       isVisible: true,
       uploadDate: new Date('2024-03-10'),
-      fileSize: 2304000,
-      dimensions: { width: 800, height: 600 }
+      images: [
+        {
+          filename: 'artwork3a.jpg',
+          s3Key: 'artworks/artwork3a.jpg',
+          s3Url: 'https://via.placeholder.com/800x600/95E1D3/FFFFFF?text=Image+1',
+          fileSize: 2304000,
+          dimensions: { width: 800, height: 600 }
+        },
+        {
+          filename: 'artwork3b.jpg',
+          s3Key: 'artworks/artwork3b.jpg',
+          s3Url: 'https://via.placeholder.com/800x600/F38181/FFFFFF?text=Image+2',
+          fileSize: 2104000,
+          dimensions: { width: 800, height: 600 }
+        },
+        {
+          filename: 'artwork3c.jpg',
+          s3Key: 'artworks/artwork3c.jpg',
+          s3Url: 'https://via.placeholder.com/800x600/AA96DA/FFFFFF?text=Image+3',
+          fileSize: 2204000,
+          dimensions: { width: 800, height: 600 }
+        }
+      ]
     }
   ];
 
@@ -60,38 +86,51 @@ export class S3Service {
     return of(this.mockImages);
   }
 
-  uploadImage(file: File, title?: string, description?: string): Observable<string> {
+  uploadImageGroup(files: File[], title?: string, description?: string): Observable<string> {
     return new Observable(observer => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const images = JSON.parse(localStorage.getItem('artworkImages') || '[]');
-        const newImage: ArtworkImage = {
-          id: Date.now().toString(),
-          filename: file.name,
-          s3Key: `artworks/${file.name}`,
-          s3Url: reader.result as string,
-          title: title || file.name.split('.')[0],
-          description: description || '',
-          order: images.length + 1,
-          isVisible: true,
-          uploadDate: new Date(),
-          fileSize: file.size,
-          dimensions: { width: 800, height: 600 }
+      const images = JSON.parse(localStorage.getItem('artworkImages') || '[]');
+      const imageFiles: any[] = [];
+      let processed = 0;
+
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          imageFiles.push({
+            filename: file.name,
+            s3Key: `artworks/${file.name}`,
+            s3Url: reader.result as string,
+            fileSize: file.size,
+            dimensions: { width: 800, height: 600 }
+          });
+          
+          processed++;
+          
+          if (processed === files.length) {
+            const newGroup: ArtworkImage = {
+              id: Date.now().toString(),
+              title: title || 'Untitled',
+              description: description || '',
+              order: images.length + 1,
+              isVisible: true,
+              uploadDate: new Date(),
+              images: imageFiles
+            };
+            
+            images.push(newGroup);
+            localStorage.setItem('artworkImages', JSON.stringify(images));
+            
+            observer.next('success');
+            observer.complete();
+          }
         };
-        
-        images.push(newImage);
-        localStorage.setItem('artworkImages', JSON.stringify(images));
-        
-        observer.next(newImage.s3Url);
-        observer.complete();
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      });
     });
   }
 
-  deleteImage(key: string): Observable<boolean> {
+  deleteImage(id: string): Observable<boolean> {
     const images = JSON.parse(localStorage.getItem('artworkImages') || '[]');
-    const filtered = images.filter((img: ArtworkImage) => img.s3Key !== key);
+    const filtered = images.filter((img: ArtworkImage) => img.id !== id);
     localStorage.setItem('artworkImages', JSON.stringify(filtered));
     return of(true);
   }

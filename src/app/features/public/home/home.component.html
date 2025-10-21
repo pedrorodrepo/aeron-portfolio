@@ -1,7 +1,7 @@
 <div class="home-container">
   <header class="hero">
-    <h1>Aeron Portfolio</h1>
-    <p>Explore my creative journey</p>
+    <h1>Arts of Æron Arbuthnot</h1>
+    <!-- <p>Arts of Æron Arbuthnot</p> -->
   </header>
 
   <div class="loading" *ngIf="loading">
@@ -10,7 +10,13 @@
 
   <div class="gallery" *ngIf="!loading">
     <div class="gallery-item" *ngFor="let image of images" (click)="openImage(image)">
-      <img [src]="image.s3Url" [alt]="image.title || image.filename" />
+      <div class="thumbnail-wrapper">
+        <img [src]="image.images[0].s3Url" [alt]="image.title" />
+        <div class="multiple-badge" *ngIf="hasMultipleImages(image)">
+          <!-- <span class="icon">📷</span> -->
+          <span class="count">{{ image.images.length }}</span>
+        </div>
+      </div>
       <div class="image-info">
         <h3>{{ image.title }}</h3>
         <p class="description" *ngIf="image.description">{{ image.description }}</p>
@@ -22,11 +28,35 @@
   <div class="modal" *ngIf="selectedImage" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <button class="close-btn" (click)="closeModal()">&times;</button>
-      <img [src]="selectedImage.s3Url" [alt]="selectedImage.title || selectedImage.filename" />
+
+      <div class="image-container">
+        <button class="nav-btn prev" *ngIf="currentImageIndex > 0" (click)="previousImage()">
+          &#8249;
+        </button>
+
+        <img [src]="selectedImage.images[currentImageIndex].s3Url" [alt]="selectedImage.title" />
+
+        <button class="nav-btn next" *ngIf="currentImageIndex < selectedImage.images.length - 1" (click)="nextImage()">
+          &#8250;
+        </button>
+      </div>
+
       <div class="modal-info">
         <h2>{{ selectedImage.title }}</h2>
         <p class="description" *ngIf="selectedImage.description">{{ selectedImage.description }}</p>
-        <p class="date">{{ selectedImage.uploadDate | date:'MM/dd/yyyy' }}</p>
+        <div class="modal-footer">
+          <p class="date">{{ selectedImage.uploadDate | date:'MM/dd/yyyy' }}</p>
+          <p class="image-counter" *ngIf="selectedImage.images.length > 1">
+            {{ currentImageIndex + 1 }} / {{ selectedImage.images.length }}
+          </p>
+        </div>
+      </div>
+
+      <div class="thumbnails" *ngIf="selectedImage.images.length > 1">
+        <div class="thumbnail" *ngFor="let img of selectedImage.images; let i = index"
+          [class.active]="i === currentImageIndex" (click)="currentImageIndex = i">
+          <img [src]="img.s3Url" [alt]="'Image ' + (i + 1)" />
+        </div>
       </div>
     </div>
   </div>

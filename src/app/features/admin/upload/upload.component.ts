@@ -7,6 +7,10 @@ import { S3Service } from '../../../core/services/s3.service';
 interface FileWithMetadata {
   file: File;
   preview: string;
+}
+
+interface ImageGroup {
+  files: FileWithMetadata[];
   title: string;
   description: string;
 }
@@ -19,7 +23,7 @@ interface FileWithMetadata {
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent {
-  filesWithMetadata: FileWithMetadata[] = [];
+  imageGroups: ImageGroup[] = [];
   uploading = false;
   uploadProgress = 0;
   message = '';
@@ -50,38 +54,56 @@ export class UploadComponent {
   processFiles(files: File[]): void {
     const validFiles = files.filter(file => file.type.startsWith('image/'));
     
+    const filesWithMetadata: FileWithMetadata[] = [];
+    let processed = 0;
+    
     validFiles.forEach(file => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.filesWithMetadata.push({
+        filesWithMetadata.push({
           file: file,
-          preview: e.target?.result as string,
-          title: file.name.split('.')[0],
-          description: ''
+          preview: e.target?.result as string
         });
+        processed++;
+        
+        if (processed === validFiles.length) {
+          // Criar novo grupo com as imagens
+          this.imageGroups.push({
+            files: filesWithMetadata,
+            title: filesWithMetadata.length === 1 ? filesWithMetadata[0].file.name.split('.')[0] : 'New Artwork',
+            description: ''
+          });
+        }
       };
       reader.readAsDataURL(file);
     });
   }
 
-  removeFile(index: number): void {
-    this.filesWithMetadata.splice(index, 1);
+  removeGroup(groupIndex: number): void {
+    this.imageGroups.splice(groupIndex, 1);
   }
 
-  uploadFiles(): void {
-    if (this.filesWithMetadata.length === 0) return;
+  removeFileFromGroup(groupIndex: number, fileIndex: number): void {
+    this.imageGroups[groupIndex].files.splice(fileIndex, 1);
+    if (this.imageGroups[groupIndex].files.length === 0) {
+      this.removeGroup(groupIndex);
+    }
+  }
+
+  uploadGroups(): void {
+    if (this.imageGroups.length === 0) return;
 
     this.uploading = true;
     this.uploadProgress = 0;
     let completed = 0;
 
-    this.filesWithMetadata.forEach(fileData => {
-      this.s3Service.uploadImage(fileData.file, fileData.title, fileData.description).subscribe({
+    this.imageGroups.forEach(group => {
+      this.s3Service.uploadImageGroup(group.files.map(f => f.file), group.title, group.description).subscribe({
         next: () => {
           completed++;
-          this.uploadProgress = (completed / this.filesWithMetadata.length) * 100;
+          this.uploadProgress = (completed / this.imageGroups.length) * 100;
           
-          if (completed === this.filesWithMetadata.length) {
+          if (completed === this.imageGroups.length) {
             this.message = 'Upload successful!';
             setTimeout(() => {
               this.router.navigate(['/admin/management']);
