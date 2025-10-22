@@ -86,11 +86,38 @@
     user-select: none;
   }
 
-  img {
+  .thumbnail-container {
+    position: relative;
     width: 120px;
     height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .image-count {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 0, 0, 0.5);
+
+      .icon {
+        font-size: 0.85rem;
+      }
+    }
   }
 
   .image-info {
