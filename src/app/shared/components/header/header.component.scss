@@ -1,7 +1,9 @@
+@use '../../../shared/styles/colors' as colors;
+
 .header {
-  background: rgba(26, 26, 26, 0.95);
+  background: colors.$color-bg-secondary;
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+  box-shadow: 0 2px 8px colors.$color-shadow-accent-light;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -18,12 +20,12 @@
   .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ff0000;
+    color: colors.$color-accent-hover;
     text-decoration: none;
     transition: color 0.3s ease;
 
     &:hover {
-      color: #cc0000;
+      color: colors.$color-accent-primary;
     }
   }
 
@@ -33,7 +35,7 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #ffffff;
+    color: colors.$color-text-primary;
   }
 
   nav {
@@ -42,24 +44,24 @@
     align-items: center;
 
     a {
-      color: #ffffff;
+      color: colors.$color-text-primary;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
 
       &:hover {
-        color: #ff0000;
+        color: colors.$color-accent-hover;
       }
 
       &.active {
-        color: #ff0000;
+        color: colors.$color-accent-hover;
       }
     }
 
     .btn-logout {
       padding: 0.5rem 1rem;
-      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
-      color: white;
+      background: colors.$color-accent-primary;
+      color: colors.$color-text-primary;
       border: none;
       border-radius: 6px;
       font-weight: 600;
@@ -68,7 +70,7 @@
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+        box-shadow: 0 4px 12px colors.$color-shadow-accent-strong;
       }
     }
   }
@@ -83,10 +85,10 @@
       top: 100%;
       left: 0;
       right: 0;
-      background: #1a1a1a;
+      background: colors.$color-bg-primary;
       flex-direction: column;
       padding: 1rem;
-      box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+      box-shadow: 0 4px 8px colors.$color-shadow-accent-light;
       display: none;
 
       &.open {

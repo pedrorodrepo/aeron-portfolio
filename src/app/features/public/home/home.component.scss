@@ -1,18 +1,20 @@
+﻿@use '../../../shared/styles/colors' as colors;
+
 .home-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  background: linear-gradient(135deg, colors.$color-bg-secondary 0%, colors.$color-bg-primary 100%);
 }
 
 .hero {
   text-align: center;
   padding: 4rem 2rem;
-  color: white;
+  color: colors.$color-text-primary;
 
   h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
-    color: #ff0000;
+    color: colors.$color-accent-primary;
   }
 
   p {
@@ -29,8 +31,8 @@
   .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ff0000;
+    border: 4px solid rgba(212, 64, 64, 0.2);
+    border-top-color: colors.$color-accent-primary;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -56,12 +58,12 @@
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  border: 1px solid #1a1a1a;
-  background: #1a1a1a;
+  border: 1px solid colors.$color-bg-secondary;
+  background: colors.$color-bg-secondary;
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(255, 0, 0, 0.3);
+    box-shadow: 0 12px 24px colors.$color-shadow-accent-medium;
   }
 
   .thumbnail-wrapper {
@@ -80,8 +82,8 @@
       position: absolute;
       top: 0.75rem;
       right: 0.75rem;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
+      background: rgba(0, 0, 0, 0.9);
+      color: colors.$color-text-primary;
       padding: 0.4rem 0.7rem;
       border-radius: 20px;
       display: flex;
@@ -89,33 +91,33 @@
       gap: 0.4rem;
       font-size: 0.85rem;
       font-weight: 600;
-      border: 1px solid rgba(255, 0, 0, 0.5);
+      border: 1px solid rgba(212, 64, 64, 0.2);
 
       .icon {
         font-size: 1rem;
       }
 
       .count {
-        color: #ff0000;
+        color: colors.$color-accent-primary;
       }
     }
   }
 
   .image-info {
     padding: 1rem;
-    background: #1a1a1a;
+    background: colors.$color-bg-secondary;
 
     h3 {
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
-      color: #ff0000;
+      color: colors.$color-accent-primary;
       font-weight: 600;
     }
 
     .description {
       margin: 0 0 0.5rem 0;
       font-size: 0.85rem;
-      color: #999;
+      color: colors.$color-text-secondary;
       line-height: 1.4;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -126,7 +128,7 @@
     .date {
       margin: 0;
       font-size: 0.75rem;
-      color: #666;
+      color: colors.$color-gray-dark;
       font-style: italic;
     }
   }
@@ -149,10 +151,10 @@
     position: relative;
     max-width: 90vw;
     max-height: 90vh;
-    background: #1a1a1a;
+    background: colors.$color-bg-secondary;
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid #ff0000;
+    border: 2px solid colors.$color-accent-primary;
     display: flex;
     flex-direction: column;
 
@@ -161,7 +163,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0a0a0a;
+      background: colors.$color-bg-primary;
 
       img {
         width: 100%;
@@ -172,8 +174,8 @@
 
       .nav-btn {
         position: absolute;
-        background: rgba(255, 0, 0, 0.8);
-        color: white;
+        background: colors.$color-accent-primary;
+        color: colors.$color-text-primary;
         border: none;
         width: 50px;
         height: 50px;
@@ -187,7 +189,7 @@
         z-index: 10;
 
         &:hover {
-          background: rgba(255, 0, 0, 1);
+          background: colors.$color-accent-primary;
           transform: scale(1.1);
         }
 
@@ -206,13 +208,13 @@
 
       h2 {
         margin: 0 0 1rem 0;
-        color: #ff0000;
+        color: colors.$color-accent-primary;
         font-size: 1.75rem;
       }
 
       .description {
         margin: 0 0 1rem 0;
-        color: #ccc;
+        color: colors.$color-text-secondary;
         font-size: 1rem;
         line-height: 1.6;
       }
@@ -224,14 +226,14 @@
 
         .date {
           margin: 0;
-          color: #666;
+          color: colors.$color-gray-dark;
           font-size: 0.9rem;
           font-style: italic;
         }
 
         .image-counter {
           margin: 0;
-          color: #ff0000;
+          color: colors.$color-accent-primary;
           font-size: 0.9rem;
           font-weight: 600;
         }
@@ -243,7 +245,7 @@
       gap: 0.5rem;
       padding: 1rem 1.5rem;
       overflow-x: auto;
-      background: #0a0a0a;
+      background: colors.$color-bg-primary;
       border-top: 1px solid #333;
 
       .thumbnail {
@@ -258,12 +260,12 @@
 
         &:hover {
           transform: scale(1.05);
-          border-color: #ff0000;
+          border-color: colors.$color-accent-primary;
         }
 
         &.active {
-          border-color: #ff0000;
-          box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+          border-color: colors.$color-accent-primary;
+          box-shadow: 0 0 10px colors.$color-shadow-accent-medium;
         }
 
         img {
@@ -278,8 +280,8 @@
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: rgba(255, 0, 0, 0.8);
-      color: white;
+      background: colors.$color-accent-primary;
+      color: colors.$color-text-primary;
       border: none;
       width: 40px;
       height: 40px;
@@ -290,7 +292,7 @@
       z-index: 20;
 
       &:hover {
-        background: rgba(255, 0, 0, 1);
+        background: colors.$color-accent-primary;
         transform: scale(1.1);
       }
     }
@@ -308,3 +310,4 @@
     padding: 1rem;
   }
 }
+

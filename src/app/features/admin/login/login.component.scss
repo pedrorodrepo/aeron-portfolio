@@ -1,14 +1,16 @@
+﻿@use '../../../shared/styles/colors' as colors;
+
 .login-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  background: linear-gradient(135deg, colors.$color-bg-secondary 0%, colors.$color-bg-primary 100%);
   padding: 2rem;
 }
 
 .login-card {
-  background: white;
+  background: colors.$color-bg-secondary;
   padding: 3rem;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -18,7 +20,7 @@
   h1 {
     margin: 0 0 2rem 0;
     text-align: center;
-    color: #333;
+    color: colors.$color-text-primary;
   }
 
   .form-group {
@@ -27,28 +29,28 @@
     label {
       display: block;
       margin-bottom: 0.5rem;
-      color: #555;
+      color: colors.$color-text-secondary;
       font-weight: 500;
     }
 
     input {
       width: 100%;
       padding: 0.75rem;
-      border: 2px solid #e0e0e0;
+      border: 2px solid colors.$color-gray-dark;
       border-radius: 8px;
       font-size: 1rem;
       transition: border-color 0.3s ease;
 
       &:focus {
         outline: none;
-        border-color: #ff0000;
+        border-color: colors.$color-accent-primary;
       }
     }
   }
 
   .error-message {
-    background: #fee;
-    color: #c33;
+    background: colors.$color-error-bg;
+    color: colors.$color-text-primary;
     padding: 0.75rem;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -58,7 +60,7 @@
   button {
     width: 100%;
     padding: 1rem;
-    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    background: linear-gradient(135deg, colors.$color-accent-primary 0%, colors.$color-accent-hover 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -69,7 +71,7 @@
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
     }
 
     &:disabled {
@@ -78,3 +80,4 @@
     }
   }
 }
+

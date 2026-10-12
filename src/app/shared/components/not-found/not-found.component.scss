@@ -1,10 +1,12 @@
+@use '../../../shared/styles/colors' as colors;
+
 .not-found-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background: linear-gradient(135deg, colors.$color-bg-primary 0%, colors.$color-bg-secondary 100%);
   animation: fadeIn 0.6s ease-out;
 }
 
@@ -30,21 +32,21 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 24px;
     font-weight: 700;
-    fill: #ff0000;
+    fill: colors.$color-accent-primary;
   }
 }
 
 .error-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: colors.$color-text-primary;
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .error-description {
   font-size: 1.125rem;
-  color: #999999;
+  color: colors.$color-text-secondary;
   margin-bottom: 2.5rem;
   line-height: 1.6;
 }
@@ -73,7 +75,7 @@
   justify-content: center;
 
   &:focus {
-    outline: 2px solid #ff0000;
+    outline: 2px solid colors.$color-accent-primary;
     outline-offset: 2px;
   }
 
@@ -83,14 +85,14 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+  background: linear-gradient(135deg, colors.$color-accent-primary 0%, colors.$color-accent-hover 100%);
+  color: colors.$color-text-primary;
+  box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
-    background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+    box-shadow: 0 6px 20px colors.$color-shadow-accent-strong;
+    background: linear-gradient(135deg, colors.$color-accent-hover 0%, colors.$color-accent-dark 100%);
   }
 
   &:active {
@@ -100,15 +102,15 @@
 
 .btn-secondary {
   background: transparent;
-  color: #ffffff;
-  border-color: #333333;
+  color: colors.$color-text-primary;
+  border-color: colors.$color-gray-dark;
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: #ff0000;
-    color: #ff0000;
+    border-color: colors.$color-accent-primary;
+    color: colors.$color-accent-primary;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+    box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
   }
 
   &:active {
@@ -118,7 +120,7 @@
 
 .help-text {
   p {
-    color: #666666;
+    color: colors.$color-gray-medium;
     font-size: 0.875rem;
     line-height: 1.5;
   }
@@ -202,18 +204,18 @@
 // High contrast mode support
 @media (prefers-contrast: high) {
   .error-title {
-    color: #ffffff;
+    color: colors.$color-text-primary;
   }
   
   .error-description {
-    color: #cccccc;
+    color: colors.$color-gray-light;
   }
   
   .btn-secondary {
-    border-color: #ffffff;
+    border-color: colors.$color-text-primary;
     
     &:hover {
-      background: #ffffff;
+      background: colors.$color-text-primary;
       color: #000000;
     }
   }
