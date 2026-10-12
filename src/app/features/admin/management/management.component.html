@@ -16,11 +16,17 @@
       [class.hidden]="!image.isVisible"
     >
       <div class="drag-handle" cdkDragHandle>☰</div>
-      <img [src]="image.s3Url" [alt]="image.title || image.filename" />
+      <div class="thumbnail-container">
+        <img [src]="image.images[0].s3Url" [alt]="image.title" />
+        <div class="image-count" *ngIf="image.images.length > 1">
+          <span class="icon">📷</span>
+          <span>{{ image.images.length }}</span>
+        </div>
+      </div>
       <div class="image-info">
-        <h3>{{ image.title || image.filename }}</h3>
+        <h3>{{ image.title }}</h3>
         <p>{{ image.description }}</p>
-        <small>Uploaded: {{ image.uploadDate | date }}</small>
+        <small>Uploaded: {{ image.uploadDate | date }} • {{ image.images.length }} image{{ image.images.length > 1 ? 's' : '' }}</small>
       </div>
       <div class="actions">
         <button 
@@ -40,7 +46,7 @@
       </div>
 
       <div class="delete-confirm" *ngIf="deleteConfirm === image.id">
-        <p>Delete this image?</p>
+        <p>Delete this group?</p>
         <button class="btn-yes" (click)="deleteImage(image.id)">Yes</button>
         <button class="btn-no" (click)="cancelDelete()">No</button>
       </div>

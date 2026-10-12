@@ -18,26 +18,38 @@
       <label for="fileInput" class="drop-label">
         <div class="icon">📁</div>
         <p>Drag & drop images here or click to browse</p>
+        <small>Cada seleção cria um novo grupo de imagens</small>
       </label>
     </div>
 
-    <div class="previews" *ngIf="filesWithMetadata.length > 0">
-      <div class="preview-item" *ngFor="let fileData of filesWithMetadata; let i = index">
-        <img [src]="fileData.preview" alt="Preview" />
-        <button class="remove-btn" (click)="removeFile(i)">&times;</button>
-        <div class="metadata-inputs">
+    <div class="groups" *ngIf="imageGroups.length > 0">
+      <div class="group-item" *ngFor="let group of imageGroups; let gi = index">
+        <div class="group-header">
+          <h3>Grupo {{ gi + 1 }} ({{ group.files.length }} imagem{{ group.files.length > 1 ? 'ns' : '' }})</h3>
+          <button class="remove-group-btn" (click)="removeGroup(gi)">&times;</button>
+        </div>
+        
+        <div class="group-metadata">
           <input 
             type="text" 
-            [(ngModel)]="fileData.title" 
-            placeholder="Title"
+            [(ngModel)]="group.title" 
+            placeholder="Título do grupo"
             class="input-title"
           />
           <textarea 
-            [(ngModel)]="fileData.description" 
-            placeholder="Description"
+            [(ngModel)]="group.description" 
+            placeholder="Descrição do grupo"
             class="input-description"
             rows="2"
           ></textarea>
+        </div>
+
+        <div class="group-previews">
+          <div class="preview-item" *ngFor="let fileData of group.files; let fi = index">
+            <img [src]="fileData.preview" alt="Preview" />
+            <button class="remove-btn" (click)="removeFileFromGroup(gi, fi)">&times;</button>
+            <div class="image-number">{{ fi + 1 }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -53,8 +65,8 @@
     <div class="actions">
       <button 
         class="btn-primary" 
-        (click)="uploadFiles()"
-        [disabled]="filesWithMetadata.length === 0 || uploading"
+        (click)="uploadGroups()"
+        [disabled]="imageGroups.length === 0 || uploading"
       >
         {{ uploading ? 'Uploading...' : 'Upload' }}
       </button>

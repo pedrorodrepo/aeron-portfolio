@@ -13,6 +13,7 @@ import { ArtworkImage } from '../../../shared/models/artwork-image.model';
 export class HomeComponent implements OnInit {
   images: ArtworkImage[] = [];
   selectedImage: ArtworkImage | null = null;
+  currentImageIndex = 0;
   loading = true;
 
   constructor(private s3Service: S3Service) {}
@@ -35,9 +36,27 @@ export class HomeComponent implements OnInit {
 
   openImage(image: ArtworkImage): void {
     this.selectedImage = image;
+    this.currentImageIndex = 0;
   }
 
   closeModal(): void {
     this.selectedImage = null;
+    this.currentImageIndex = 0;
+  }
+
+  nextImage(): void {
+    if (this.selectedImage && this.currentImageIndex < this.selectedImage.images.length - 1) {
+      this.currentImageIndex++;
+    }
+  }
+
+  previousImage(): void {
+    if (this.currentImageIndex > 0) {
+      this.currentImageIndex--;
+    }
+  }
+
+  hasMultipleImages(image: ArtworkImage): boolean {
+    return image.images.length > 1;
   }
 }

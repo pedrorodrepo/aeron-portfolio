@@ -65,10 +65,7 @@ export class ManagementComponent implements OnInit {
   }
 
   deleteImage(id: string): void {
-    const image = this.images.find(img => img.id === id);
-    if (!image) return;
-
-    this.s3Service.deleteImage(image.s3Key).subscribe({
+    this.s3Service.deleteImage(id).subscribe({
       next: () => {
         this.imageService.deleteImage(id).subscribe({
           next: () => {
