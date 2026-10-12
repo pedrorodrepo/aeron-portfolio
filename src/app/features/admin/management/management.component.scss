@@ -1,6 +1,8 @@
+﻿@use '../../../shared/styles/colors' as colors;
+
 .management-container {
   min-height: 100vh;
-  background: #0a0a0a;
+  background: colors.$color-bg-primary;
   padding: 2rem;
 }
 
@@ -13,12 +15,12 @@
 
   h1 {
     margin: 0;
-    color: #ffffff;
+    color: colors.$color-text-primary;
   }
 
   .btn-upload {
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    background: linear-gradient(135deg, colors.$color-accent-primary 0%, colors.$color-accent-hover 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -28,7 +30,7 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
     }
   }
 }
@@ -41,8 +43,8 @@
   .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid #333;
-    border-top-color: #ff0000;
+    border: 4px solid colors.$color-gray-medium;
+    border-top-color: colors.$color-accent-primary;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -61,13 +63,13 @@
 }
 
 .image-item {
-  background: #1a1a1a;
+  background: colors.$color-bg-secondary;
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.1);
+  box-shadow: 0 2px 8px colors.$color-shadow-accent-light;
   position: relative;
   transition: opacity 0.3s ease;
 
@@ -82,7 +84,7 @@
   .drag-handle {
     cursor: move;
     font-size: 1.5rem;
-    color: #999;
+    color: colors.$color-text-secondary;
     user-select: none;
   }
 
@@ -103,7 +105,7 @@
       position: absolute;
       top: 0.5rem;
       right: 0.5rem;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.9);
       color: white;
       padding: 0.25rem 0.5rem;
       border-radius: 12px;
@@ -112,7 +114,7 @@
       gap: 0.25rem;
       font-size: 0.75rem;
       font-weight: 600;
-      border: 1px solid rgba(255, 0, 0, 0.5);
+      border: 1px solid rgba(212, 64, 64, 0.2);
 
       .icon {
         font-size: 0.85rem;
@@ -125,16 +127,16 @@
 
     h3 {
       margin: 0 0 0.5rem 0;
-      color: #ffffff;
+      color: colors.$color-text-primary;
     }
 
     p {
       margin: 0 0 0.5rem 0;
-      color: #999;
+      color: colors.$color-text-secondary;
     }
 
     small {
-      color: #666;
+      color: colors.$color-gray-dark;
     }
   }
 
@@ -157,11 +159,11 @@
     }
 
     .btn-toggle {
-      background: #e3f2fd;
+      background: colors.$color-accent-primary;
     }
 
     .btn-delete {
-      background: #ffebee;
+      background: colors.$color-error-bg;
     }
   }
 
@@ -170,11 +172,11 @@
     top: 50%;
     right: 1.5rem;
     transform: translateY(-50%);
-    background: #0a0a0a;
+    background: colors.$color-bg-primary;
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
-    border: 1px solid #333;
+    box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
+    border: 1px solid colors.$color-gray-dark;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -182,7 +184,7 @@
     p {
       margin: 0;
       font-weight: 600;
-      color: #ffffff;
+      color: colors.$color-text-primary;
     }
 
     button {
@@ -194,20 +196,20 @@
     }
 
     .btn-yes {
-      background: #ff0000;
+      background: colors.$color-accent-primary;
       color: white;
 
       &:hover {
-        background: #cc0000;
+        background: colors.$color-accent-hover;
       }
     }
 
     .btn-no {
-      background: #333;
-      color: #ffffff;
+      background: colors.$color-gray-dark;
+      color: colors.$color-text-primary;
 
       &:hover {
-        background: #444;
+        background: colors.$color-gray-medium;
       }
     }
   }
@@ -216,20 +218,20 @@
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
-  background: #1a1a1a;
+  background: colors.$color-bg-secondary;
   border-radius: 12px;
   max-width: 600px;
   margin: 0 auto;
 
   p {
     font-size: 1.25rem;
-    color: #999;
+    color: colors.$color-text-secondary;
     margin-bottom: 2rem;
   }
 
   .btn-upload {
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    background: linear-gradient(135deg, colors.$color-accent-primary 0%, colors.$color-accent-hover 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -240,7 +242,7 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
     }
   }
 }
@@ -267,3 +269,4 @@
     }
   }
 }
+

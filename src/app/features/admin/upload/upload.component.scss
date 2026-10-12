@@ -1,34 +1,36 @@
+﻿@use '../../../shared/styles/colors' as colors;
+
 .upload-container {
   min-height: 100vh;
-  background: #0a0a0a;
+  background: colors.$color-bg-primary;
   padding: 2rem;
 }
 
 .upload-card {
   max-width: 800px;
   margin: 0 auto;
-  background: #1a1a1a;
+  background: colors.$color-bg-secondary;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+  box-shadow: 0 2px 8px colors.$color-shadow-accent-light;
 
   h1 {
     margin: 0 0 2rem 0;
-    color: #ffffff;
+    color: colors.$color-text-primary;
   }
 }
 
 .drop-zone {
-  border: 3px dashed #333;
+  border: 3px dashed colors.$color-gray-dark;
   border-radius: 12px;
   padding: 3rem;
   text-align: center;
   transition: border-color 0.3s ease;
   cursor: pointer;
-  background: #0a0a0a;
+  background: colors.$color-bg-primary;
 
   &:hover {
-    border-color: #ff0000;
+    border-color: colors.$color-accent-primary;
   }
 
   .drop-label {
@@ -40,13 +42,13 @@
     }
 
     p {
-      color: #999;
+      color: colors.$color-text-secondary;
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
 
     small {
-      color: #666;
+      color: colors.$color-gray-dark;
       font-size: 0.9rem;
     }
   }
@@ -60,8 +62,8 @@
 }
 
 .group-item {
-  background: #0a0a0a;
-  border: 2px solid #333;
+  background: colors.$color-bg-primary;
+  border: 2px solid colors.$color-gray-dark;
   border-radius: 12px;
   padding: 1.5rem;
 
@@ -73,12 +75,12 @@
 
     h3 {
       margin: 0;
-      color: #ff0000;
+      color: colors.$color-accent-primary;
       font-size: 1.2rem;
     }
 
     .remove-group-btn {
-      background: rgba(255, 0, 0, 0.8);
+      background: colors.$color-accent-primary;
       color: white;
       border: none;
       width: 35px;
@@ -89,7 +91,7 @@
       line-height: 1;
 
       &:hover {
-        background: rgba(255, 0, 0, 1);
+        background: colors.$color-accent-primary;
       }
     }
   }
@@ -104,20 +106,20 @@
     .input-description {
       width: 100%;
       padding: 0.75rem;
-      background: #1a1a1a;
-      border: 1px solid #333;
+      background: colors.$color-bg-secondary;
+      border: 1px solid colors.$color-gray-dark;
       border-radius: 4px;
-      color: #ffffff;
+      color: colors.$color-text-primary;
       font-size: 1rem;
       font-family: inherit;
 
       &:focus {
         outline: none;
-        border-color: #ff0000;
+        border-color: colors.$color-accent-primary;
       }
 
       &::placeholder {
-        color: #666;
+        color: colors.$color-gray-dark;
       }
     }
 
@@ -138,8 +140,8 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  background: #1a1a1a;
-  border: 1px solid #444;
+  background: colors.$color-bg-secondary;
+  border: 1px solid colors.$color-gray-medium;
 
   img {
     width: 100%;
@@ -151,7 +153,7 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: rgba(255, 0, 0, 0.8);
+    background: colors.$color-accent-primary;
     color: white;
     border: none;
     width: 28px;
@@ -163,7 +165,7 @@
     z-index: 10;
 
     &:hover {
-      background: rgba(255, 0, 0, 1);
+      background: colors.$color-accent-primary;
     }
   }
 
@@ -171,7 +173,7 @@
     position: absolute;
     bottom: 0.5rem;
     left: 0.5rem;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
@@ -182,14 +184,14 @@
 
 .progress-bar {
   height: 8px;
-  background: #333;
+  background: colors.$color-gray-dark;
   border-radius: 4px;
   overflow: hidden;
   margin: 1rem 0;
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #ff0000, #cc0000);
+    background: linear-gradient(90deg, colors.$color-accent-primary, colors.$color-accent-hover);
     transition: width 0.3s ease;
   }
 }
@@ -198,12 +200,12 @@
   padding: 1rem;
   border-radius: 8px;
   margin: 1rem 0;
-  background: #fee;
-  color: #c33;
+  background: colors.$color-error-bg;
+  color: colors.$color-text-primary;
 
   &.success {
-    background: #efe;
-    color: #3c3;
+    background: colors.$color-success-bg;
+    color: colors.$color-text-primary;
   }
 }
 
@@ -233,20 +235,21 @@
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    background: linear-gradient(135deg, colors.$color-accent-primary 0%, colors.$color-accent-hover 100%);
     color: white;
 
     &:hover:not(:disabled) {
-      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 4px 12px colors.$color-shadow-accent-medium;
     }
   }
 
   .btn-secondary {
-    background: #333;
-    color: #ffffff;
+    background: colors.$color-gray-dark;
+    color: colors.$color-text-primary;
 
     &:hover:not(:disabled) {
-      background: #444;
+      background: colors.$color-gray-medium;
     }
   }
 }
+
