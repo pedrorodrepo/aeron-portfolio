@@ -1,4 +1,5 @@
 @use '../../../shared/styles/colors' as colors;
+@import '../../../shared/styles/animations';
 
 .not-found-container {
   min-height: 100vh;
@@ -123,36 +124,6 @@
     color: colors.$color-gray-medium;
     font-size: 0.875rem;
     line-height: 1.5;
-  }
-}
-
-// Animations
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
   }
 }
 
