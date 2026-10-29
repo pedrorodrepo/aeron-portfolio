@@ -4,6 +4,11 @@ on:
   push:
     branches: [ master ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -13,6 +18,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -30,5 +36,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist/aeron-portfolio
-        cname: # Opcional: adicione seu domínio customizado aqui se tiver (ex: portfolio.com)
+        publish_dir: ./dist/aeron-portfolio/browser
+        force_orphan: true
